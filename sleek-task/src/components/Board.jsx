@@ -26,6 +26,7 @@ export default function Board() {
   const [assigneeFilter,  setAssigneeFilter]  = useState(null);
   const [activeView,      setActiveView]      = useState('board');
   const [quickAddColId,   setQuickAddColId]   = useState(null);
+  const [sidebarOpen,     setSidebarOpen]     = useState(false);
 
   // "N" key → quick-add in first column
   useEffect(() => {
@@ -77,7 +78,8 @@ export default function Board() {
 
   return (
     <div className="app-shell">
-      <Sidebar board={board} activeView={activeView} onViewChange={setActiveView} />
+      <Sidebar board={board} activeView={activeView} onViewChange={setActiveView} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
 
       <div className="main-area">
         <BoardHeader
@@ -93,6 +95,7 @@ export default function Board() {
           onAssigneeFilter={setAssigneeFilter}
           assignees={assignees}
           onReset={handleReset}
+          onMenuToggle={() => setSidebarOpen(o => !o)}
         />
 
         <StatsBar board={board} />

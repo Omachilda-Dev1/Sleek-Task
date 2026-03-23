@@ -1,0 +1,13 @@
+feat: full mobile responsiveness
+
+- Sidebar becomes fixed slide-over drawer on mobile with overlay backdrop
+- Hamburger menu button in topbar (mobile only) toggles sidebar
+- Sidebar close button visible on mobile
+- Columns snap-scroll horizontally on mobile, full-width minus padding
+- Task drawer goes full-screen width on mobile
+- Stats bar scrolls horizontally on mobile with reduced padding
+- Filter chips hidden on small screens to save topbar space
+- Search input expands to full width on mobile
+- Toast container spans full width on mobile
+- Added IconMenu to Icons.jsx
+- Added slideUp keyframe for mobile drawer animation

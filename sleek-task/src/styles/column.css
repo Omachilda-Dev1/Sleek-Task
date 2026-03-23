@@ -9,6 +9,16 @@
   max-height: calc(100vh - 56px - 52px - 32px);
   transition: background 0.15s ease, border-color 0.2s ease;
   animation: fadeUp 0.3s ease both;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 768px) {
+  .column {
+    width: calc(100vw - 56px);
+    min-width: 240px;
+    max-width: 320px;
+    max-height: calc(100vh - 56px - 48px - 24px);
+  }
 }
 
 .column:nth-child(1) { animation-delay: 0.05s; }

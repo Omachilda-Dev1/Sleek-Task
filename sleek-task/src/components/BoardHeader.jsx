@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import ThemeToggle from './ThemeToggle';
 import SearchBar from './SearchBar';
-import { IconSettings, IconRefresh, IconBarChart, IconLayout } from './Icons';
+import { IconSettings, IconRefresh, IconMenu } from './Icons';
 import '../styles/layout.css';
 
 export default function BoardHeader({
@@ -12,7 +12,7 @@ export default function BoardHeader({
   assigneeFilter, onAssigneeFilter,
   assignees,
   onReset,
-  taskCount, overdueCount, doneCount,
+  onMenuToggle,
 }) {
   const [editing, setEditing]   = useState(false);
   const [draft, setDraft]       = useState(title);
@@ -33,6 +33,11 @@ export default function BoardHeader({
 
   return (
     <header className="topbar">
+      {/* Hamburger — mobile only */}
+      <button className="topbar-menu-btn" onClick={onMenuToggle} aria-label="Open menu">
+        <IconMenu size={16} />
+      </button>
+
       {/* Title */}
       <div className="topbar-title-wrap">
         {editing ? (

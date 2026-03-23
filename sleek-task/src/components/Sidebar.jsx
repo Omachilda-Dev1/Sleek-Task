@@ -1,8 +1,8 @@
 import React from 'react';
-import { IconLayout, IconInbox, IconBarChart, IconStar, IconCheckCircle, IconAlertCircle, IconClock } from './Icons';
+import { IconLayout, IconInbox, IconBarChart, IconStar, IconCheckCircle, IconAlertCircle, IconClock, IconX } from './Icons';
 import '../styles/layout.css';
 
-export default function Sidebar({ board, activeView, onViewChange }) {
+export default function Sidebar({ board, activeView, onViewChange, isOpen, onClose }) {
   const tasks      = Object.values(board.tasks);
   const total      = tasks.length;
   const done       = Object.values(board.columns).find(c => c.title === 'Done')?.taskIds.length || 0;
@@ -21,7 +21,7 @@ export default function Sidebar({ board, activeView, onViewChange }) {
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar${isOpen ? ' open' : ''}`}>
       {/* Logo */}
       <div className="sidebar-logo">
         <div className="sidebar-logo-mark">S</div>
@@ -29,6 +29,9 @@ export default function Sidebar({ board, activeView, onViewChange }) {
           <span className="sidebar-logo-name">Sleek Task</span>
           <span className="sidebar-logo-tagline">Tasks, beautifully managed.</span>
         </div>
+        <button className="sidebar-close-btn" onClick={onClose} aria-label="Close sidebar">
+          <IconX size={14} />
+        </button>
       </div>
 
       {/* Nav */}

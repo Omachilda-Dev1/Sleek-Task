@@ -11,6 +11,12 @@
   max-width: 320px;
 }
 
+@media (max-width: 480px) {
+  .searchbar-input-wrap {
+    max-width: 100%;
+  }
+}
+
 .searchbar-icon {
   position: absolute;
   left: 9px;
@@ -41,6 +47,12 @@
   align-items: center;
   gap: 5px;
   flex-wrap: nowrap;
+}
+
+@media (max-width: 480px) {
+  .filter-chips {
+    display: none;
+  }
 }
 
 .filter-dropdown { position: relative; }
