@@ -1,0 +1,249 @@
+.task-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 11px 12px 10px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 0.15s,
+    transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.18s ease,
+    opacity 0.15s;
+  animation: cardEnter 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  overflow: hidden;
+}
+
+/* Priority stripe */
+.task-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--card-priority-color, var(--border-strong));
+  border-radius: var(--radius) 0 0 var(--radius);
+  transition: width 0.15s;
+}
+
+.task-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.task-card:hover::before {
+  width: 4px;
+}
+
+.task-card.overdue {
+  background: var(--overdue-bg);
+  border-color: rgba(232,24,90,0.2);
+}
+
+.task-card.done {
+  opacity: var(--done-opacity);
+}
+
+.task-card.done .card-title {
+  text-decoration: line-through;
+  text-decoration-color: var(--text-muted);
+}
+
+.task-card.dragging {
+  box-shadow: var(--shadow-lg);
+  transform: rotate(2deg) scale(1.02);
+  border-color: var(--accent);
+  z-index: 9999;
+}
+
+.task-card.dimmed {
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* Card stagger animation */
+.task-card:nth-child(1)  { animation-delay: 0.04s; }
+.task-card:nth-child(2)  { animation-delay: 0.08s; }
+.task-card:nth-child(3)  { animation-delay: 0.12s; }
+.task-card:nth-child(4)  { animation-delay: 0.16s; }
+.task-card:nth-child(5)  { animation-delay: 0.20s; }
+.task-card:nth-child(6)  { animation-delay: 0.24s; }
+
+/* Top row */
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+
+.card-id {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.card-priority-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-priority-badge.high   { background: var(--priority-high-bg); color: var(--priority-high); }
+.card-priority-badge.medium { background: var(--priority-med-bg);  color: var(--priority-med); }
+.card-priority-badge.low    { background: var(--priority-low-bg);  color: var(--priority-low); }
+
+.priority-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* Title */
+.card-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.45;
+  margin-bottom: 9px;
+  word-break: break-word;
+  letter-spacing: -0.01em;
+}
+
+.card-title-input {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 3px 7px;
+  outline: none;
+  width: 100%;
+  resize: none;
+  line-height: 1.45;
+  margin-bottom: 9px;
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+/* Tags */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.card-tag {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+/* Footer */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.card-meta-item.overdue {
+  color: var(--priority-high);
+  font-weight: 600;
+}
+
+.card-meta-item svg {
+  flex-shrink: 0;
+}
+
+/* Right side of footer */
+.card-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.task-card:hover .card-actions {
+  opacity: 1;
+}
+
+.card-action-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: background 0.1s, color 0.1s, transform 0.1s;
+}
+
+.card-action-btn:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.card-assignee {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  border: 1.5px solid var(--bg-surface);
+  transition: transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.card-assignee:hover {
+  transform: scale(1.15);
+  z-index: 1;
+}
