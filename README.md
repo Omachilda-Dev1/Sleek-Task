@@ -1,6 +1,6 @@
 # Sleek Task
 
-Tasks, beautifully managed.
+
 
 A production-grade Kanban board built with React. Designed to feel like a premium productivity tool — bold color, intentional typography, and fluid interactions throughout.
 
